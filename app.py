@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Request , status
+from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
+from db.config import create_tables
 from features.auth.logic import router as auth_router
-from Fastapi import FastAPI
-
+from features.activites.logic import router as activities_router
 
 import logging
 
@@ -11,8 +11,12 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="API Fruit Rec")
 
 app.include_router(auth_router)
+app.include_router(activities_router)
 
 
+@app.on_event("startup")
+def startup():
+    create_tables()
 
 
 @app.get("/")
