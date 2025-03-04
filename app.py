@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request , status
 from fastapi.responses import JSONResponse
 from features.auth.logic import router as auth_router
+from Fastapi import FastAPI
 
 
 import logging
